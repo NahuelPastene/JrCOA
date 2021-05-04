@@ -23,6 +23,13 @@ namespace TecnicoDevJr.Controllers
             var user =_userRepository.GetAll().OrderBy(o => o.IdUsuario);
             return View(user);
         }
+        public IActionResult Delete(int Id)
+        {
+            Usuario usuario = _userRepository.GetById(Id);
+            _userRepository.Delete(usuario);
+            _userRepository.SaveChanges();
+            return RedirectToAction("Index", "Home");
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
