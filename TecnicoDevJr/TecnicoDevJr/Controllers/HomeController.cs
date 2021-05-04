@@ -6,21 +6,22 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using TecnicoDevJr.Models;
+using TecnicoDevJr.Repository;
 
 namespace TecnicoDevJr.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly UserRepository _userRepository;
+        public HomeController(DevJrCoaContext context)
         {
-            _logger = logger;
+            _userRepository = new UserRepository(context);
         }
 
         public IActionResult Index()
         {
-            return View();
+            var user =_userRepository.GetAll().OrderBy(o => o.IdUsuario);
+            return View(user);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
