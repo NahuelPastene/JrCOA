@@ -12,7 +12,7 @@ namespace TecnicoDevJr.Models
         [DisplayName("Id")]
         public int IdUsuario { get; set; }
         [Required(ErrorMessage = "El campo Nombre de Usuario es requerido.")]
-        [DisplayName("Nombre de Usuario")]
+        [DisplayName("User Name")]
         public string UserName { get; set; }
         [Required(ErrorMessage = "El campo Nombre es requerido.")]
         [DisplayName("Nombre")]
