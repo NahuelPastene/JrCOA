@@ -15,15 +15,62 @@ namespace TecnicoDevJr.Controllers
         {
             _userRepository = new UserRepository(context);
         }
+        public IActionResult Index()
+        {
+            var user = _userRepository.GetAll().OrderBy(o => o.IdUsuario);
+            return View(user);
+        }
+        public IActionResult Delete(int Id)
+        {
+            Usuario usuario = _userRepository.GetById(Id);
+            _userRepository.Delete(usuario);
+            _userRepository.SaveChanges();
+            return RedirectToAction("Index", "Home");
+        }
+        [HttpGet]
+        [Route("Create")]
         public IActionResult Create()
         {
-            return View();
+            return View("Edit",new Usuario());
         }
-        //[HttpPost]
-        //public IActionResult Create(Usuario usuario)
-        //{
-        //    usuario = _userRepository.Create(usuario);
-        //    return RedirectToAction("Index", "Home");
-        //}
+        [HttpGet]
+        [Route("Edit/{id}")]
+        public IActionResult Edit(int id)
+        {
+                var usuario = _userRepository.GetById(id);
+                return View(usuario);
+        }
+        [HttpPost]
+        [Route("Edit")]
+        public IActionResult Edit(Usuario usuario)
+        {
+            if (ModelState.IsValid)
+            {
+                    _userRepository.Create(usuario);
+                    _userRepository.SaveChanges();
+                return RedirectToAction("Index", "Home");
+            }
+            return View(usuario);
+        }
+        [HttpPost]
+        [Route("Edit/{id}")]
+        public IActionResult Edit(int id, Usuario usuario)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = _userRepository.GetById(usuario.IdUsuario);
+                if (user != null)
+                {
+                    user.UserName = usuario.UserName;
+                    user.Nombre = usuario.Nombre;
+                    user.Email = usuario.Email;
+                    user.Telefono = usuario.Telefono;
+                    _userRepository.Edit(user);
+                    _userRepository.SaveChanges();
+                }
+                return RedirectToAction("Index", "Home");
+            }
+            return View(usuario);
+        }
     }
 }

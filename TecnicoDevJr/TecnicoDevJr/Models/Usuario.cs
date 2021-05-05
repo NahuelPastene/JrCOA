@@ -9,6 +9,7 @@ namespace TecnicoDevJr.Models
 {
     public partial class Usuario
     {
+        [Range(0, int.MaxValue)]
         [DisplayName("Id")]
         public int IdUsuario { get; set; }
         [Required(ErrorMessage = "El campo Nombre de Usuario es requerido.")]
