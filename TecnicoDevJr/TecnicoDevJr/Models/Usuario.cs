@@ -19,7 +19,7 @@ namespace TecnicoDevJr.Models
         [DisplayName("Nombre")]
         public string Nombre { get; set; }
         [Required(ErrorMessage = "El campo Email es requerido.")]
-        [DataType(DataType.EmailAddress)]
+        [RegularExpression(@"^((?!\.)[\w-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$", ErrorMessage = "Debe ingresar un Email válido.")]
         [DisplayName("Email")]
         public string Email { get; set; }
         [DisplayName("Telefono")]
