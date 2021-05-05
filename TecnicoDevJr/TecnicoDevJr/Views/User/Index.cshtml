@@ -4,6 +4,15 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<script type="text/javascript">
+        function DeleteConfirm() {
+            if (confirm("Seguro que desea eliminar el usuario?"))
+                return true;
+            else
+                return false;
+        }
+</script>
+
 <div class="container-fluid">
     <div class="card shadow mb-4">
         <div class="card-header py-3">
@@ -52,7 +61,7 @@
                             </td>
                             <td>
                                 <a href="@Url.Action("Edit","User",new {id=item.IdUsuario})"><i class="fas fa-user-edit" style="font-size: 18px;"></i></a>
-                                <a asp-action="Delete" asp-route-id="@item.IdUsuario"><i class="fas fa-user-times" style="color: red; font-size: 18px;"></i></a>
+                                <a onclick="return  DeleteConfirm()" asp-action="Delete" asp-route-id="@item.IdUsuario"><i class="fas fa-user-times" style="color: red; font-size: 18px;"></i></a>
                             </td>
                         </tr>
                     }

@@ -31,14 +31,14 @@ namespace TecnicoDevJr.Controllers
         [Route("Create")]
         public IActionResult Create()
         {
-            return View("Edit",new Usuario());
+            return View("Edit", new Usuario());
         }
         [HttpGet]
         [Route("Edit/{id}")]
         public IActionResult Edit(int id)
         {
-                var usuario = _userRepository.GetById(id);
-                return View(usuario);
+            var usuario = _userRepository.GetById(id);
+            return View(usuario);
         }
         [HttpPost]
         [Route("Edit")]
@@ -46,8 +46,8 @@ namespace TecnicoDevJr.Controllers
         {
             if (ModelState.IsValid)
             {
-                    _userRepository.Create(usuario);
-                    _userRepository.SaveChanges();
+                _userRepository.Create(usuario);
+                _userRepository.SaveChanges();
                 return RedirectToAction("Index", "Home");
             }
             return View(usuario);

@@ -19,7 +19,7 @@ namespace TecnicoDevJr.Models
         [DisplayName("Nombre")]
         public string Nombre { get; set; }
         [Required(ErrorMessage = "El campo Email es requerido.")]
-        [DataType(DataType.EmailAddress, ErrorMessage = "Email inválido")]
+        [DataType(DataType.EmailAddress)]
         [DisplayName("Email")]
         public string Email { get; set; }
         [DisplayName("Telefono")]
